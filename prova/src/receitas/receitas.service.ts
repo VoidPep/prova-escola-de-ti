@@ -1,8 +1,9 @@
 import { Injectable, Inject } from '@nestjs/common';
 import { DataSource } from 'typeorm';
-import { CreateReceitaDto } from './dto/create-receita.dto';
+import { CreateIngredienteDto, CreateReceitaDto } from './dto/create-receita.dto';
 import { UpdateReceitaDto } from './dto/update-receita.dto';
 import { Receita } from '../receitas/entities/receita.entity';
+import { Ingrediente } from './entities/ingredientes.entity';
 
 @Injectable()
 export class ReceitasService {
@@ -30,5 +31,9 @@ export class ReceitasService {
 
   async remove(id: number) {
     return await this.database.getRepository(Receita).delete({id: id})
+  }
+
+  async adicionarIngrediente(createIngredienteDto: CreateIngredienteDto) {
+    return await this.database.getRepository(Ingrediente).save(createIngredienteDto)
   }
 }

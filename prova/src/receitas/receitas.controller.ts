@@ -1,6 +1,6 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, Query } from '@nestjs/common';
 import { ReceitasService } from './receitas.service';
-import { CreateReceitaDto } from './dto/create-receita.dto';
+import { CreateReceitaDto, CreateIngredienteDto } from './dto/create-receita.dto';
 import { UpdateReceitaDto } from './dto/update-receita.dto';
 
 @Controller('receitas')
@@ -30,5 +30,10 @@ export class ReceitasController {
   @Delete(':id')
   remove(@Param('id') id: string) {
     return this.receitasService.remove(+id);
+  }
+
+  @Post(":id")
+  adicionarIngrediente(@Query('id') id: string, @Body() createIngredienteDto: CreateIngredienteDto) {
+    return this.receitasService.adicionarIngrediente(+id, createIngredienteDto);
   }
 }
