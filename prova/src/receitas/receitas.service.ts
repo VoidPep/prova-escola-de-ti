@@ -15,7 +15,7 @@ export class ReceitasService {
   }
 
   async create(createReceitaDto: CreateReceitaDto) {
-    return await this.database.getRepository(Receita).create(createReceitaDto)
+    return await this.database.getRepository(Receita).save(createReceitaDto)
   }
 
   async findOne(id: number): Promise<Receita> {
